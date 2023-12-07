@@ -1,22 +1,23 @@
 use bevy::prelude::*;
+use crate::components::Player;
 
 pub fn character_movement(
-    mut characters: Query<(&mut Transform, &Sprite)>,
+    mut characters: Query<(&mut Transform, &Player)>,
     input: Res<Input<KeyCode>>,
-    time: Res<Time>,
+    _time: Res<Time>,
 ) {
-    for (mut transform, _) in &mut characters {
+    for (mut transform, player) in &mut characters {
         if input.pressed(KeyCode::W) {
-            transform.translation.y += 100.0 * time.delta_seconds();
+            transform.translation.y += player.mv;
         }
         if input.pressed(KeyCode::A) {
-            transform.translation.x -= 100.0 * time.delta_seconds();
+            transform.translation.x -= player.mv;
         }
         if input.pressed(KeyCode::S) {
-            transform.translation.y -= 100.0 * time.delta_seconds();
+            transform.translation.y -= player.mv;
         }
         if input.pressed(KeyCode::D) {
-            transform.translation.x += 100.0 * time.delta_seconds();
+            transform.translation.x += player.mv;
         }
     }
 }
