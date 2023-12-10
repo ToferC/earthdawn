@@ -14,25 +14,29 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
     let hero_texture = asset_server.load("character.png");
 
-    commands.spawn(SpriteBundle {
+    commands.spawn((SpriteBundle {
         sprite: Sprite {
             custom_size: Some(Vec2::new(32.0, 32.0)),
             ..default()
         },
         texture: hero_texture,
         ..default()
-    })
-    .insert(Player::default());
+        },
+        Player::default(),
+        Name::new("Player"),
+    ));
 
     let ghoul_texture = asset_server.load("ghoul.png");
 
-    commands.spawn(SpriteBundle {
+    commands.spawn((SpriteBundle {
         sprite: Sprite {
             custom_size: Some(Vec2::new(32.0, 32.0)),
             ..default()
         },
         texture: ghoul_texture,
         ..default()
-    })
-    .insert(Enemy::default());
+        },
+        Enemy::default(),
+        Name::new("Ghoul"),
+    ));
 }
